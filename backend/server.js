@@ -1,6 +1,7 @@
-import path from "path";
-import express from "express";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import express from "express";
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.routes.js";
@@ -10,7 +11,11 @@ import userRoutes from "./routes/user.routes.js";
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirnam = path.dirname(__filename);
+
+
+dotenv.config({ path: path.join(__dirnam, ".env") });
 
 const __dirname = path.resolve();
 // PORT should be assigned after calling dotenv.config() because we need to access the env variables. Didn't realize while recording the video. Sorry for the confusion.
